@@ -1,0 +1,73 @@
+按照主体的不同，将特征分为四类：用户特征，商品特征，商铺特征以及属性特征。
+①用户特征：
+user_count_whole     用户全局点击数
+user_count_wholebefore   用户之前点击数
+user_count_day       用户当日点击数
+user_count_daybefore   用户当日之前点击数
+user_count_hour      用户当小时点击数
+user_count_hourbefore   用户当小时之前点击数
+user_yescount_lastday    用户前一天购买数
+user_yescount_lastNday    用户前几日购买数
+user_yescount_daybefore_train  用户当日之前购买数
+
+user_duringtime      用户一次浏览所持续的时间
+user_duringtime_sum_whole    时间总和
+user_duringtime_sum_day      一日浏览时间总和
+user_duringtime_sum_hour     一小时浏览时间总和
+
+user_category2_count_whole   用户种类全局点击数
+user_category2_count_wholebefore   用户种类全局之前点击数
+
+user_item_count_whole       用户商品全局点击数
+user_item_count_wholebefore      用户商品全局之前点击数
+user_item_count_daybefore      用户商品当日之前点击数
+
+user_shop_count_wholebefore     用户商铺全局之前点击数
+user_shop_count_whole       用户商铺全局点击数
+
+is_user_last_day    是否是用户当日最后一次浏览
+user_hour_count     用户浏览的小时数
+is_user_item_last    是否是用户最后一次浏览
+
+user_query_count_day    用户一日内的查询次数
+user_count_querybefore    用户在该查询中之前的浏览次数
+user_item_count_querybefore   用户在该查询中之前对该商品的浏览次数
+query_page_count   一次查询中浏览的页数的个数
+query_max_page         一次查询中的最大页数
+query_min_page     一次查询中的最小页数
+page_length      一次查询中最大最小页数之差
+query_page_item_count   一次查询中一页广告列表中浏览的个数
+query_item_avg_time    一次查询中浏览商品的平均时间
+
+②商铺特征
+shop_count_whole    商铺总体点击次数
+shop_item_prob_day   商铺商品当日占比
+shop_gender_count_day  商铺性别当日点击次数
+
+③商品特征
+item_count_day    商品当日点击次数
+item_yescount_lastNday  商品前几日购买次数
+item_rate_lastNday    商品前几日转换率
+item_rate_lastday     商品前一日转换率
+
+item_gender_yescount_before   商品性别之前的购买个数
+item_gender_yescountprob_before   商品性别之前的购买占比
+item_age_yescount_before     商品年龄之前的购买个数
+item_age_yescountprob_before    商品年龄之前的购买占比
+item_age_count_day    商品年龄当日的点击次数
+item_userstar_count_whole    商品用户等级全局的点击次数
+item_useroccupation_yescount_before   商品用户职业之前的购买次数
+
+④属性特征
+price_category2_count_whole    价格类别全局点击次数
+price_sales_count_whole     价格销量全局点击次数
+price_gender_count_whole      价格性别全局点击次数
+sales_category2_count_whole    销量类别全局点击次数
+sales_category2_yescount_before   销量类别之前的购买个数
+sales_brand_count_whole      销量品牌全局点击次数
+category2_age_count_whole   类别年龄全局点击次数
+category2_shopstar_count_whole    类别商店等级全局点击次数
+gender_age_count_whole     性别年龄全局点击次数
+gender_city_count_whole     性别城市全局点击次数
+age_reviewnum_count_whole    年龄回复量全局点击次数
+

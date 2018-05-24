@@ -1,3 +1,5 @@
+=============思路1 from wh=======================
+
 按照主体的不同，将特征分为四类：用户特征，商品特征，商铺特征以及属性特征。
 ①用户特征：
 user_count_whole     用户全局点击数
@@ -71,3 +73,101 @@ gender_age_count_whole     性别年龄全局点击次数
 gender_city_count_whole     性别城市全局点击次数
 age_reviewnum_count_whole    年龄回复量全局点击次数
 
+
+=================思路2 from zl======================
+类别变量：LabelEncoded处理
+	['item_id', 'item_brand_id', 'item_city_id', 'user_gender_id', 'user_occupation_id', 'shop_id', 'cate2', 'cate3']
+
+该shop的几种评分的 max, min, mean, median
+
+序列长度： ['len_item_category', 'len_item_property', 'len_predict_category_property']
+
+user feature :
+	['item_id', 'cate2', 'cate3', 'item_brand_id', 'item_city_id', 
+                'item_price_level', 'item_sales_level', 'item_collected_level', 'item_pv_level', 
+                'user_gender_id', 'user_age_level', 'user_occupation_id', 'user_star_level', 
+                'context_page_id',
+                'shop_id', 'shop_review_num_level', 'shop_star_level']
+
+	1.该user当天的点击次数
+	   此条记录为该user当天点击的第几条记录， 倒数第几条
+	   点击rank / 当天点击次数
+
+	2.对以上所有的类别 ： 该user当天点击了多少种col, 对该种col点击了多少次 以及 比率（除以该user当天总点击数）
+
+	3.该user当天以及前一天的点击记录数
+	   该user当天以及前一天的点击天数
+	   该user以前是否有过购买
+
+	4.对以上所有的类别 ： 该user当天以及前一天 点击该col的种类数
+
+	5.对以上所有的类别 ： 该user当天以及前一天 点击该col的次数
+
+	6.对以上所有的类别 ： 该user当天以及前一天 点击该col的天数
+
+item feature ：
+	['item_price_level', 'item_sales_level', 'item_collected_level', 'item_pv_level']
+
+	1.对以上所有的类别 ： 该item当天该col的种类数
+	2.对以上所有的类别 ： 该item所有天数里该col的种类数
+	3.对以上所有的类别 ： 该item当天以及之前该col的种类数
+
+brand feature :
+	['item_id', 'cate2', 'cate3', 'item_city_id', 
+                'item_price_level', 'item_sales_level', 'item_collected_level', 'item_pv_level', 
+                'user_gender_id', 'user_age_level', 'user_occupation_id', 'user_star_level', 
+                'context_page_id',
+                'shop_id', 'shop_review_num_level', 'shop_star_level']
+
+	1.对以上所有的类别 ： 该brand下该col的种类数
+
+shop feature :
+	['item_id', 'cate2', 'cate3', 'item_brand_id', 'item_city_id', 
+                'item_price_level', 'item_sales_level', 'item_collected_level', 'item_pv_level', 
+                'user_gender_id', 'user_age_level', 'user_occupation_id', 'user_star_level', 
+                'context_page_id',
+                'shop_review_num_level', 'shop_star_level']
+
+	1.对以上所有的类别 ： 该shop下该col的种类数
+	2.对['shop_review_num_level', 'shop_star_level'] ： 该shop当天该col的种类数
+
+点击特征 :
+	['item_id', 'cate2', 'cate3', 'item_brand_id', 'item_city_id', 
+                'item_price_level', 'item_sales_level', 'item_collected_level', 'item_pv_level', 
+                'user_gender_id', 'user_age_level', 'user_occupation_id', 'user_star_level', 
+                'context_page_id',
+                'shop_id', 'shop_review_num_level', 'shop_star_level']
+
+	1.对以上所有的类别 ： 该col当天的点击率
+	2.对以上所有的类别 ： 该col当天的用户点击概率
+	3.对以上所有的类别 ： 当天以及前一天该col的点击率
+	4.对以上所有的类别 ： 前一天该col的点击率
+
+转换率特征 :
+	['item_id', 'cate2', 'cate3', 'item_brand_id', 'item_city_id', 
+                'item_price_level', 'item_sales_level', 'item_collected_level', 'item_pv_level', 
+                'user_gender_id', 'user_age_level', 'user_occupation_id', 'user_star_level', 
+                'context_page_id',
+                'shop_id', 'shop_review_num_level', 'shop_star_level']
+
+	1.对以上所有的类别 ： 前一天该col的转化率
+	2.对以上所有的类别 ： 当天之前该col的转化率
+
+时间差特征 ：
+	['item_id', 'cate2', 'cate3', 'item_brand_id', 'item_city_id', 
+                'context_page_id',
+                'shop_id']
+
+	1.该user上一次点击是几秒之前
+	2.该user当天下一次点击是几秒之后
+	3.对以上所有的类别 ： 该user当天上一次点击该col是几秒之前
+	4.对以上所有的类别 ： 该user当天下一次点击该col是几秒之后
+
+##7号加入特征
+	['item_id', 'cate2', 'cate3', 'item_brand_id', 'item_city_id', 
+                    'item_price_level', 'item_sales_level', 'item_collected_level', 'item_pv_level', 
+                    'user_gender_id', 'user_age_level', 'user_occupation_id', 'user_star_level', 
+                    'context_page_id',
+                    'shop_id', 'shop_review_num_level', 'shop_star_level']
+
+	对以上col : 用当天的数据根据kfold提取出的转换率
